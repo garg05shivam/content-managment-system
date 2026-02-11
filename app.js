@@ -6,6 +6,7 @@ import artifactRoutes from "./routes/artifacts.route.js"
 import likes from "./routes/likes.routes.js";
 import comment from "./routes/comment.route.js";
 import cookieParser from "cookie-parser";
+import cloudinary from "./config/cloudinary.js";  
 const app = express();
 
 /* Middlewares */
