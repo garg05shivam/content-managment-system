@@ -5,7 +5,7 @@ import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
-router.post("/:id/like", authMiddleware, toggleLike);
+router.post("/:id/likes", authMiddleware, toggleLike);
 router.get("/:id/likes", getLikeCount);
 
 export default router;
