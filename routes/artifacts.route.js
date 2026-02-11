@@ -3,6 +3,7 @@ import { createArtifact ,getArtifacts} from "../controllers/artifact.controller.
 import { authMiddleware} from "../middlewares/auth.middleware.js";
 import { authorizeRoles } from "../middlewares/role.middlware.js";
 import { upload } from "../middlewares/uploads.middleware.js";
+import apiLimiter from "../middlewares/rateLimiter.middleware.js";
 
 const router = express.Router();
 
@@ -11,5 +12,5 @@ const router = express.Router();
  */
 
 router.post("/", authMiddleware,upload.single("file"), createArtifact);
-router.get("/", authMiddleware,authorizeRoles("ADMIN"), getArtifacts);
+router.get("/", authMiddleware,authorizeRoles("ADMIN"), apiLimiter,getArtifacts);
 export default router;
