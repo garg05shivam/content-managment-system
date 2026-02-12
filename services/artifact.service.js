@@ -42,7 +42,7 @@ export const createArtifactService = async ({
 
 
 
-//  * Get artifacts
+//   Get artifacts
 
 export const getArtifactsService = async ({ userId, role }) => {
   if (role === "ADMIN") {
