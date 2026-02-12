@@ -3,9 +3,9 @@ import User from "../models/users.js";
 import OTP from "../models/otp.js";
 import { generateOTP } from "../utils/generateOtp.js";
 import jwt from "jsonwebtoken";
-/**
- * Initiate signup by generating OTP
- */
+
+//  * Initiate signup by generating OTP
+
 export const initiateSignupService = async (email) => {
   // 1. Check if user already exists
   const existingUser = await User.findOne({ email });
@@ -19,7 +19,7 @@ export const initiateSignupService = async (email) => {
   // 3. Generate OTP
   const otp = generateOTP();
 
-  // 4. Store OTP (hashed by pre-save middleware)
+  // 4. Store OTP 
   await OTP.create({
     email,
     otp,
@@ -32,9 +32,9 @@ export const initiateSignupService = async (email) => {
   };
 };
 
-/**
- * Verify OTP and create user
- */
+
+//  * Verify OTP and create user
+
 export const verifySignupOtpService = async ({
   email,
   otp,
@@ -60,7 +60,7 @@ export const verifySignupOtpService = async ({
     throw new Error("Invalid OTP");
   }
 
-  // 4. Create user (password hashed via pre-save middleware)
+  // 4. Create user 
   const user = await User.create({
     name,
     email,
@@ -68,7 +68,7 @@ export const verifySignupOtpService = async ({
     role,
   });
 
-  // 5. Destroy OTP (one-time use)
+  // 5. Destroy OTP 
   await OTP.deleteOne({ email });
 
   return {

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Socket Chat Test</title>
+</head>
+<body>
+
+<h3>Live Chat Test</h3>
+
+<input id="userId" placeholder="Your User Id"/>
+<button onclick="connectUser()">Connect</button>
+
+<br><br>
+
+<input id="receiverId" placeholder="Receiver ID" />
+<input id="chatMessage" placeholder="Message" />
+<button onclick="sendMessage()">Send</button>
+
+<br><br>
+
+<div id="messages"></div>
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
+<script>
+    const socket = io("http://localhost:5000");
+
+    function connectUser() {
+        const userId = document.getElementById("userId").value;
+        socket.emit("user-online", userId);
+        alert("Connected as " + userId);
+    }
+
+    function sendMessage() {
+        const senderId = document.getElementById("userId").value;
+        const receiverId = document.getElementById("receiverId").value;
+        const message = document.getElementById("chatMessage").value;
+
+        socket.emit("send-message", {
+            senderId,
+            receiverId,
+            message
+        });
+
+        document.getElementById("chatMessage").value = "";
+    }
+
+    socket.on("receive-message", (data) => {
+        appendMessage("Received: " + data.message);
+    });
+
+    socket.on("message-sent", (data) => {
+        appendMessage("You: " + data.message);
+    });
+
+    function appendMessage(msg) {
+        const div = document.getElementById("messages");
+        div.innerHTML += "<p>" + msg + "</p>";
+    }
+
+</script>
+
+</body>
+</html>

@@ -2,9 +2,9 @@ import Artifact from "../models/artifact.js";
 import cloudinary from "../config/cloudinary.js";
 import fs from "fs";
 
-/**
- * Create a new artifact
- */
+
+//  * Create a new artifact
+
 export const createArtifactService = async ({
   title,
   content,
@@ -41,9 +41,9 @@ export const createArtifactService = async ({
 };
 
 
-/**
- * Get artifacts
- */
+
+//  * Get artifacts
+
 export const getArtifactsService = async ({ userId, role }) => {
   if (role === "ADMIN") {
     return await Artifact.find().populate("author", "name email role");

@@ -9,6 +9,8 @@ import cookieParser from "cookie-parser";
 import cloudinary from "./config/cloudinary.js";
 import {testing} from "./crons/testing.js";
 import webhookRoutes from "./webhook/webhooks.js"
+import chatRoutes from "./routes/chats.route.js";
+
 
 const app = express();
 
@@ -35,7 +37,7 @@ app.use("/auth",authRoutes);
 app.use("/artifacts", artifactRoutes);
 app.use("/likes", likes);
 app.use("/comments", comment);
-// app.use("/chats",chatRoutes);
+app.use("/chats",chatRoutes);
 export default app;
 
 
